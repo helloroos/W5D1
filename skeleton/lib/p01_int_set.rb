@@ -74,34 +74,38 @@ class IntSet
 end
 
 class ResizingIntSet
-  attr_reader :count , :@num_buckets
+  attr_reader :count, :num_buckets
 
   def initialize(num_buckets = 20)
     @store = Array.new(num_buckets) { Array.new }
     @count = 0
-    @num_buckets = num_buckets
+    # @num_buckets = num_buckets
+    @bucket = num_buckets
   end
 
   def insert(num)
-    bucket = num % 20
-    if @store[bucket].nil?
-      @store[bucket] = num
-    else 
-       resize!
-    end    
-    
+    unless include?(num)
+      if self[num].empty?
+        self[num] << num 
+        @count += 1
+      else
+        resize! # Increase bucket size && move element into right bucket
+      end
+  end
   end
 
   def remove(num)
   end
 
   def include?(num)
+    self[num].include?(num)
   end
 
   private
 
   def [](num)
     # optional but useful; return the bucket corresponding to `num`
+    @store[num % @bucket]
   end
 
   def num_buckets
@@ -109,6 +113,11 @@ class ResizingIntSet
   end
 
   def resize!
-  #  times {@store << []}
+    # if @store[bucket].nil? 
+    # Y: Let it be
+    # N: resize > num_bucket * 2
+    # add the new_num_buckets to 
+
+    # call on insert
   end
 end
