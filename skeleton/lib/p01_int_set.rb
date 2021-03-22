@@ -5,25 +5,24 @@ class MaxIntSet
   def initialize(max) # 4
     @store = Array.new(max)
     @max = max
-  
   end
 
- 
-
   def insert(num)
-      if is_valid?(num)
-        @store[num] = true 
-        
-      end
-    
+    if is_valid?(num)
+      @store[num] = true 
+    end
   end
 
   def remove(num)
+    if is_valid?(num)
+      @store[num] = false
+    end
   end
 
   def include?(num)
-    # @store.each {|n| return true if n == num  }
-    @store.include?(num)
+    if is_valid?(num)
+      @store[num]
+    end
   end
 
   private
@@ -38,7 +37,6 @@ class MaxIntSet
   end
 
   def validate!(num)
-
   end
 end
 
@@ -49,12 +47,16 @@ class IntSet
   end
 
   def insert(num)
+    bucket = num % 20
+    @store[bucket] = num
   end
 
   def remove(num)
+    
   end
 
   def include?(num)
+    @store.include?(num)
   end
 
   private
