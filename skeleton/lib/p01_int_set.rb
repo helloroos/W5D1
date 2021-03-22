@@ -1,5 +1,8 @@
 class MaxIntSet
-  def initialize(max)
+
+  attr_reader :max
+
+  def initialize(max) # 4
     @store = Array.new
     @max = max
   
@@ -7,9 +10,10 @@ class MaxIntSet
 
   def insert(num)
       if num <= @max
-        @store << num 
+        @store << num
+        @store.include?(num)
       else 
-         raise "error num out of range" 
+        raise "Out of bounds"
       end
   end
 
