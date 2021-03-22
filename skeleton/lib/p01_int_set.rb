@@ -47,11 +47,14 @@ class IntSet
   end
 
   def insert(num)
+   
     bucket = num % 20
+    # @store[bucket] << num 
     @store[bucket] = num
   end
 
   def remove(num)
+    @store.delete(num)
     
   end
 
@@ -71,14 +74,22 @@ class IntSet
 end
 
 class ResizingIntSet
-  attr_reader :count
+  attr_reader :count , :@num_buckets
 
   def initialize(num_buckets = 20)
     @store = Array.new(num_buckets) { Array.new }
     @count = 0
+    @num_buckets = num_buckets
   end
 
   def insert(num)
+    bucket = num % 20
+    if @store[bucket].nil?
+      @store[bucket] = num
+    else 
+       resize!
+    end    
+    
   end
 
   def remove(num)
@@ -98,5 +109,6 @@ class ResizingIntSet
   end
 
   def resize!
+  #  times {@store << []}
   end
 end
