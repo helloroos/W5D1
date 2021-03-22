@@ -1,14 +1,24 @@
 class MaxIntSet
   def initialize(max)
+    @store = Array.new
+    @max = max
+  
   end
 
   def insert(num)
+      if num <= @max
+        @store << num 
+      else 
+         raise "error num out of range" 
+      end
   end
 
   def remove(num)
   end
 
   def include?(num)
+    # @store.each {|n| return true if n == num  }
+    @store.include?(num)
   end
 
   private
